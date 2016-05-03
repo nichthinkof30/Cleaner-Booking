@@ -15,14 +15,26 @@
     <%= f.label :first_name %><br>
     <%= f.text_field :first_name %>
   </div>
+
   <div class="field">
     <%= f.label :last_name %><br>
     <%= f.text_field :last_name %>
   </div>
+
+  <% if @cities.present? %>
+    <% @cities.each do |city| %>
+      <div class="field">
+        <%= f.check_box :city_list, { multiple: true, checked: cities_checked?(f.object.working_cities_id, city.id) }, city.id.to_s, '' %>
+        <%= city.name %>
+      </div>
+    <% end %>
+  <% end %>
+
   <div class="field">
     <%= f.label :quality_score %><br>
     <%= f.text_field :quality_score %>
   </div>
+
   <div class="actions">
     <%= f.submit %>
   </div>
