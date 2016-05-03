@@ -4,10 +4,12 @@ class Cleaner < ActiveRecord::Base
 
   has_many :working_cities
   has_many :cities, through: :working_cities
+  has_many :bookings
 
   scope :sort_best_scores, -> { order('quality_score DESC') }
 
-  validates :first_name, :last_name, :quality_score, presence: true
+  validates :first_name, :last_name, :quality_score, :email, presence: true
+  validates :email, format: { with: Devise::email_regexp }
   validates :quality_score, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 5 }
 
   def attach_working_cities(city_list)

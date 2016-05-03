@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <strong>Email:</strong>
+  <%= @cleaner.email %>
+</p>
+
+<p>
   <strong>Working Cities:</strong>
   <%= @cleaner.working_cities_name %>
 </p>
@@ -18,6 +23,16 @@
 <p>
   <strong>Quality score:</strong>
   <%= @cleaner.quality_score %>
+</p>
+
+<p>
+  <% if @cleaner.bookings.present? %>
+    <ul>
+      <% @cleaner.bookings.each do |booking| %>
+        <li><%= link_to 'Show Booking', booking_path(booking) %></li>
+      <% end %>
+    </ul>
+  <% end %>
 </p>
 
 <%= link_to 'Edit', edit_cleaner_path(@cleaner) %> |

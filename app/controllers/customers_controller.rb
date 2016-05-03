@@ -1,6 +1,5 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
-  skip_before_filter :authenticate, only: [:create]
 
   # GET /customers
   # GET /customers.json
@@ -25,19 +24,14 @@ class CustomersController < ApplicationController
   # POST /customers
   # POST /customers.json
   def create
-    @exist_customer = Customer.find_by_phone_number(customer_params[:phone_number])
-    if @exist_customer.blank?
-      @customer = Customer.new(customer_params)
-    end
+    @customer = Customer.new(customer_params)
 
     respond_to do |format|
-      if @exist_customer.present?
-        format.html { redirect_to service_requirements_path(customer_id: @exist_customer.id), notice: "Welcome Back, #{@exist_customer.first_name}" }
-      elsif @customer.save
-        format.html { redirect_to service_requirements_path(customer_id: @customer.id), notice: 'Customer was successfully created.' }
+      if @customer.save
+        format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
         format.json { render :show, status: :created, location: @customer }
       else
-        format.html { render 'landing' }
+        format.html { render :new }
         format.json { render json: @customer.errors, status: :unprocessable_entity }
       end
     end

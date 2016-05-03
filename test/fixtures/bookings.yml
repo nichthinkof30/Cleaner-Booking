@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  customer_id: 
-  cleaner_id: 
+  customer_id: 1
+  cleaner_id: 1
   date: 2016-01-19
 
 two:
-  customer_id: 
-  cleaner_id: 
+  customer_id: 1
+  cleaner_id: 1
   date: 2016-01-19

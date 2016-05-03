@@ -21,6 +21,11 @@
     <%= f.text_field :last_name %>
   </div>
 
+  <div class="field">
+    <%= f.label :email %><br>
+    <%= f.text_field :email %>
+  </div>
+
   <% if @cities.present? %>
     <% @cities.each do |city| %>
       <div class="field">

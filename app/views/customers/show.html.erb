@@ -15,5 +15,15 @@
   <%= @customer.phone_number %>
 </p>
 
+<p>
+  <ul>
+  <% if @customer.bookings.present? %>
+    <% @customer.bookings.each do |booking| %>
+      <li><%= link_to "Booking #{booking.id}", booking_path(booking) %></li>
+    <% end %>
+  <% end %>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_customer_path(@customer) %> |
 <%= link_to 'Back', customers_path %>

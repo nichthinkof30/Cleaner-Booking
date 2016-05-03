@@ -4,16 +4,33 @@
   <title>Homework</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-
+  0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-  <%= link_to 'Bookings', bookings_path %>
-  <%= link_to 'Customers', customers_path %>
-  <%= link_to 'Cleaners', cleaners_path %>
-  <%= link_to 'Cities', cities_path %>
+  <nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <%= link_to 'Home', root_path %>
+        </li>
 
-  <hr>
+        <% if user_signed_in? && current_user.admin? %>
+          <li><%= link_to 'Bookings', bookings_path %></li>
+          <li><%= link_to 'Customers', customers_path %></li>
+          <li><%= link_to 'Cleaners', cleaners_path %></li>
+          <li><%= link_to 'Cities', cities_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 
   <%= yield %>
 

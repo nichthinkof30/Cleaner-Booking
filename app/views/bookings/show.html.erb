@@ -2,12 +2,12 @@
 
 <p>
   <strong>Customer:</strong>
-  <%= @booking.customer %>
+  <%= link_to 'Show Customer', customer_path(@booking.customer) %>
 </p>
 
 <p>
   <strong>Cleaner:</strong>
-  <%= @booking.cleaner %>
+  <%= link_to 'Show Cleaner', cleaner_path(@booking.cleaner) %>
 </p>
 
 <p>

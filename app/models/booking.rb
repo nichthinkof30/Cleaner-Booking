@@ -1,4 +1,7 @@
 class Booking < ActiveRecord::Base
+
+  after_commit :email_cleaner, on: :create
+
   belongs_to :customer
   belongs_to :cleaner
 
@@ -9,5 +12,9 @@ class Booking < ActiveRecord::Base
   scope :with_cleaner_ids, ->(cleaner_ids) { where(cleaner_id: cleaner_ids) }
 
   validates :customer, :cleaner, :date, presence: true
+
+  def email_cleaner
+    Notifier.notify(self.cleaner, self).deliver_now
+  end
 
 end

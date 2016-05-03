@@ -1,23 +1,28 @@
-<h1>Fill Services Requirements</h1>
-
-<% flash.each do |key, value| %>
-  <%= value %>
-<% end %>
-
-<%= form_tag '' do %>
-
-  <div class="field">
-    <%= label_tag 'Date?' %><br>
-    <%= select_date(Time.now, use_two_digit_numbers: true, prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
+<div class='col-md-3'></div>
+<div class='col-md-6'>
+  <div class="page-header">
+    <h1>Fill Services Requirements</h1>
   </div>
 
-  <div class="field">
-    <%= label_tag 'Which city are you from?' %><br>
-    <%= select_tag :city_id, options_from_collection_for_select(@cities, "id", "name"), include_blank: true, required: true %>
-  </div>
+  <% flash.each do |key, value| %>
+    <%= value %>
+  <% end %>
 
-  <div class="actions">
-    <%= submit_tag 'Book Cleaner' %>
-  </div>
+  <%= form_tag '' do %>
+    <div class="form-group">
+      <%= label_tag 'Date?' %><br>
+      <%= select_date(Time.now, use_two_digit_numbers: true, prompt: {day: 'Choose day', month: 'Choose month', year: 'Choose year'}) %>
+    </div>
 
-<% end %>
+    <div class="form-group">
+      <%= label_tag 'Which city are you from?' %><br>
+      <%= select_tag :city_id, options_from_collection_for_select(@cities, "id", "name"), include_blank: true, required: true %>
+    </div>
+
+    <div class="form-group">
+      <%= submit_tag 'Book Cleaner', class: 'btn btn-primary' %>
+    </div>
+  <% end %>
+
+</div>
+<div class='col-md-3'></div>

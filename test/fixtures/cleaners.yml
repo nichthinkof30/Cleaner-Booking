@@ -3,9 +3,9 @@
 one:
   first_name: MyString
   last_name: MyString
-  quality_score: 9.99
+  quality_score: 5
 
 two:
   first_name: MyString
   last_name: MyString
-  quality_score: 9.99
+  quality_score: 5

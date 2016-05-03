@@ -1,6 +1,6 @@
 class ServicesController < ApplicationController
 
-  skip_before_filter :authenticate
+  skip_before_filter :authenticate_user!
 
   def landing
     @customer = Customer.new
@@ -48,12 +48,37 @@ class ServicesController < ApplicationController
     end
   end
 
+  def customer_enquiry
+    @exist_customer = Customer.find_by_phone_number(customer_params[:phone_number])
+    if @exist_customer.blank?
+      @customer = Customer.new(customer_params)
+    end
+
+    respond_to do |format|
+      if @exist_customer.present?
+        format.html { redirect_to service_requirements_path(customer_id: @exist_customer.id), notice: "Welcome Back, #{@exist_customer.first_name}" }
+      elsif @customer.save
+        format.html { redirect_to service_requirements_path(customer_id: @customer.id), notice: 'Customer was successfully created.' }
+        format.json { render :show, status: :created, location: @customer }
+      else
+        format.html { render 'landing' }
+        format.json { render json: @customer.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def complete_booking
     @booking = Booking.find(params[:booking_id])
 
     if @booking.blank?
       redirect_to root_path, notice: 'Booking Not Found'
     end
+  end
+
+  private
+
+  def customer_params
+    params.require(:customer).permit(:first_name, :last_name, :phone_number)
   end
 
 end
